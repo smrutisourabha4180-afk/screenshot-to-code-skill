@@ -45,7 +45,9 @@ Ask the agent with a screenshot attached:
 ```text
 screenshot-to-code-skill/
 ├── SKILL.md                        # Entry point: when to use, operating loop, guardrails
-├── README.md
+├── README.md                       # Install and usage
+├── INSTALL-PROMPT.md               # Shareable prompt: installs by cloning this repo
+├── MASTER-PROMPT.md                # Shareable prompt: any agent installs into itself
 ├── references/
 │   ├── workflow.md                 # Phased checklist form of the loop
 │   ├── generation-rules.md         # Output discipline, asset rules, stack scaffolding
