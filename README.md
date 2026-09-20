@@ -1,78 +1,69 @@
-\# Screenshot to Code Skill
+# Screenshot to Code — Agent Skill
 
+A reusable agent skill for converting UI screenshots, mockups, and screen recordings into accurate, runnable frontend implementations — plus full operating instructions for the [abi/screenshot-to-code](https://github.com/abi/screenshot-to-code) application it is derived from.
 
+## What it does
 
-A reusable agent skill for converting UI screenshots, mockups, and visual references into accurate frontend implementations.
+Given a visual reference, the agent:
 
+1. Inspects the target project (framework, styling system, reusable components, assets)
+2. Analyzes the reference (layout, components, type, color, assets, states)
+3. Plans component and layout structure
+4. Implements in the project's own stack
+5. Renders the page headlessly and captures a screenshot
+6. Diffs the render against the reference
+7. Fixes the largest deviation first and repeats
+8. Reports files changed, verification performed, and known deviations
 
+It also covers running and extending the upstream app: local setup, API keys, stacks, models, prompts, and evals.
 
-\## Purpose
+## Install
 
+Copy or symlink this folder into your agent's skills directory:
 
+```bash
+# Claude Code
+ln -s "$PWD" ~/.claude/skills/screenshot-to-code      # macOS/Linux
+# Windows (PowerShell, admin)
+New-Item -ItemType Junction -Path "$HOME\.claude\skills\screenshot-to-code" -Target "$PWD"
+```
 
-Use this skill when a user provides:
+Any agent that reads `SKILL.md` from a skills folder can use it.
 
+## Usage
 
+Ask the agent with a screenshot attached:
 
-\- A UI screenshot
+> Recreate this screenshot in my React + Tailwind app, then verify it renders the same.
 
-\- A mockup
+> Turn this screen recording into a working prototype page.
 
-\- A visual reference
+> This design is slightly off — the sidebar is too wide and the heading is too small. Fix it and re-verify.
 
-\- Multiple screenshots
-
-\- A design that needs to be recreated in code
-
-
-
-The skill guides the agent through:
-
-
-
-1\. Understanding the reference
-
-2\. Inspecting the existing project
-
-3\. Identifying assets
-
-4\. Planning the implementation
-
-5\. Building the UI
-
-6\. Running the application
-
-7\. Capturing the result
-
-8\. Comparing the result with the reference
-
-9\. Refining visual differences
-
-
-
-\## Structure
-
-
+## Structure
 
 ```text
-
 screenshot-to-code-skill/
-
-├── SKILL.md
-
+├── SKILL.md                        # Entry point: when to use, operating loop, guardrails
 ├── README.md
-
 ├── references/
-
-│   └── workflow.md
-
+│   ├── workflow.md                 # Phased checklist form of the loop
+│   ├── generation-rules.md         # Output discipline, asset rules, stack scaffolding
+│   └── repo-reference.md           # Upstream repo map, commands, config, evals, gotchas
 └── scripts/
+    ├── inspect_project.py          # Detect framework, package manager, entry points, assets
+    ├── analyze_assets.py           # Inventory image assets (size, format, mode)
+    ├── capture_screenshot.py       # Headless Chromium render (1440×900, full page)
+    └── compare_screenshots.py      # Contrast-boosted difference image
+```
 
-&#x20;   ├── inspect\_project.py
+## Requirements
 
-&#x20;   ├── capture\_screenshot.py
+- Python 3.10+ for the scripts
+- `playwright` + Chromium for `capture_screenshot.py`
+- `pillow` for `compare_screenshots.py` and `analyze_assets.py`
+- Python 3.10+, Poetry, Node + pnpm, and at least one model API key if you intend to run the upstream app itself
 
-&#x20;   ├── compare\_screenshots.py
+## Source and license
 
-&#x20;   └── analyze\_assets.py
-
+Methodology and prompt rules derived from [abi/screenshot-to-code](https://github.com/abi/screenshot-to-code), MIT licensed. This skill is an independent documentation layer; it ships no upstream code.

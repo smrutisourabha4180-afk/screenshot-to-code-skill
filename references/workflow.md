@@ -1,122 +1,74 @@
-\# Screenshot-to-Code Workflow
-
-
-
-\## Phase 1 — Understand
-
-
-
-1\. Inspect the reference screenshot.
-
-2\. Identify the page structure.
-
-3\. Identify components and their hierarchy.
-
-4\. Identify typography, colors, spacing, borders and shadows.
-
-5\. Identify images, icons and other visual assets.
-
-6\. Identify responsive behavior when multiple screenshots are available.
-
-
-
-\## Phase 2 — Inspect the Project
-
-
-
-1\. Detect the framework.
-
-2\. Inspect the existing component structure.
-
-3\. Inspect existing styling.
-
-4\. Inspect available assets.
-
-5\. Identify the application entry point.
-
-6\. Preserve the existing architecture.
-
-
-
-\## Phase 3 — Implement
-
-
-
-1\. Build the page structure.
-
-2\. Create reusable components where appropriate.
-
-3\. Implement the visual styling.
-
-4\. Add required interactions.
-
-5\. Reuse existing assets whenever possible.
-
-6\. Avoid unnecessary dependencies.
-
-
-
-\## Phase 4 — Verify
-
-
-
-1\. Start the application.
-
-2\. Open the target page.
-
-3\. Capture the rendered page.
-
-4\. Compare it with the reference.
-
-5\. Identify visual differences.
-
-
-
-\## Phase 5 — Refine
-
-
-
-Fix differences in this order:
-
-
-
-1\. Layout
-
-2\. Positioning
-
-3\. Dimensions
-
-4\. Spacing
-
-5\. Typography
-
-6\. Colors
-
-7\. Images and icons
-
-8\. Borders and radius
-
-9\. Shadows
-
-10\. Small details
-
-
-
-Repeat verification and refinement until the implementation closely matches the reference.
-
-
-
-\## Phase 6 — Finish
-
-
-
-1\. Confirm the application runs.
-
-2\. Confirm there are no obvious runtime errors.
-
-3\. Remove temporary debugging code.
-
-4\. Keep unrelated project files untouched.
-
-5\. Report the files changed.
-
+# Screenshot-to-Code Workflow
+
+Compact checklist form of the operating loop in `SKILL.md`.
+
+## Phase 1 — Understand the reference
+
+- [ ] Read the screenshot at the intended viewport
+- [ ] Map page regions: nav, hero, sidebar, content, footer
+- [ ] Identify the component tree and repeated elements
+- [ ] Extract the type scale (family, size, weight, line height)
+- [ ] Extract the palette, borders, radii, and shadows
+- [ ] Inventory images, icons, and logos
+- [ ] Note interactive and stateful regions
+- [ ] Note responsive intent when multiple viewports are given
+- [ ] List anything unreadable as an open question
+
+## Phase 2 — Inspect the target project
+
+- [ ] Detect framework and build system
+- [ ] Detect package manager from the lockfile
+- [ ] Locate entry points and routing
+- [ ] Identify the styling system and design tokens
+- [ ] List reusable components
+- [ ] List existing assets and their directory convention
+- [ ] Record the dev command
+
+## Phase 3 — Plan
+
+- [ ] Component boundaries
+- [ ] Layout strategy (grid/flex, container widths, gutters)
+- [ ] Breakpoints
+- [ ] Required assets and how each is sourced
+- [ ] New dependencies — justify each or drop it
+- [ ] State and interaction requirements
+
+## Phase 4 — Implement
+
+- [ ] Build structure before styling
+- [ ] Reuse existing components and tokens
+- [ ] Keep changes inside the task's scope
+- [ ] Avoid absolute positioning where flow layout works
+
+## Phase 5 — Verify
+
+- [ ] Start the dev server
+- [ ] Render the page
+- [ ] Capture at the reference viewport
+- [ ] Diff against the reference
+- [ ] Confirm no build or runtime errors
+
+## Phase 6 — Refine
+
+Fix in this order, largest deviation first:
+
+1. Layout
+2. Positioning
+3. Dimensions
+4. Spacing
+5. Typography
+6. Color
+7. Images and icons
+8. Borders and radius
+9. Shadows
+10. Micro-detail
+
+Re-render after each round. Stop when remaining differences are cosmetic or explained.
+
+## Phase 7 — Finish
+
+- [ ] Application runs clean
+- [ ] Target page verified against the reference
+- [ ] Debug code removed
+- [ ] Unrelated files untouched
+- [ ] Deviations and verification tier reported
